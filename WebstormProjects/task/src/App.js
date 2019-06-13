@@ -1,7 +1,8 @@
 
 import React, {Component} from 'react';
 import './App.css';
-import Table from "./Table";
+import HeaderPage from "./HeaderPage"
+import FooterPage from "./FooterPage"
 import Input from "./Input";
 
 class App extends Component {
@@ -14,7 +15,9 @@ class App extends Component {
     //const array = this.state.array;
     return (
         <div>
-         <Input/>
+          <HeaderPage/>
+          <Input/>
+          <FooterPage/>
         </div>
     );
   }
