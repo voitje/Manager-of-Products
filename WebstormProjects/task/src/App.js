@@ -1,9 +1,11 @@
 
 import React, {Component} from 'react';
 import './App.css';
-import HeaderPage from "./HeaderPage"
-import FooterPage from "./FooterPage"
+import Authorization from './components/Authorization'
+import {BrowserRouter, Route} from 'react-router-dom'
 import Input from "./Input";
+import HeaderPage from "./components/HeaderPage";
+import FooterPage from "./components/FooterPage";
 
 class App extends Component {
 
@@ -12,13 +14,15 @@ class App extends Component {
   };
 
   render() {
-    //const array = this.state.array;
     return (
-        <div>
-          <HeaderPage/>
-          <Input/>
-          <FooterPage/>
-        </div>
+            <BrowserRouter>
+              <div>
+                <HeaderPage/>
+                <Route path="/" component={Authorization} exact />
+                <Route path='/accounting' component={Input}/>
+                <FooterPage/>
+              </div>
+            </BrowserRouter>
     );
   }
 }

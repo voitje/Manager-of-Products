@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import { Link } from "react-router-dom";
 import './Input.css'
 
 var TOTAL_COST = 0;
@@ -74,6 +74,9 @@ class Input extends Component {
     const {array} = this.state;
     return (
         <div style={{marginTop:'70px'}}>
+          <div style={{marginLeft: '90%'}}>
+            <Link to='/'>ВЫЙТИ</Link>
+          </div>
             <form>
               <input
                   id="input"

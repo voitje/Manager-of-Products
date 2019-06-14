@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import './FooterPage.css'
+import '../FooterPage.css'
 
 
 class FooterPage extends Component {

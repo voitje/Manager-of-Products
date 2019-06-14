@@ -1,0 +1,9 @@
+#name {
+    float: bottom;
+}
+.FormCenter {
+    margin-left: auto;
+    margin-right: auto;
+    width: 6em;
+    margin-top: 100px;
+}
