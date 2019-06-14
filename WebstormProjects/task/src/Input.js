@@ -4,21 +4,6 @@ import './Input.css'
 
 var TOTAL_COST = 0;
 
-var inputStyle = {
-  marginTop: "20px",
-  marginLeft: "20px",
-  marginBottom: "20px"
-};
-
-var nameStyle = {
-  //width: "100px",
-  float: "left"
-};
-
-function createProduct(props){
-
-}
-
 class Input extends Component {
   state = {
     array: [],
@@ -61,98 +46,96 @@ class Input extends Component {
     }
   };
 
-  /*addProduct = () => {
-    const {array, item} = this.state;
-    if (item.text !== '') {
-      array.push(item);
-      this.setState({array: array, item: {...this.state.item, id: this.state.item.id + 1}});
-      this.setState({item: {text: ''}});
-    }
-  };*/
-
   addProductPrice = () => {
     const {array, item} = this.state;
     if (item.price !== 0 && item.text !== '') {
       array.push(item);
       this.setState({array: array, item: {...this.state.item, id: this.state.item.id + 1}});
-      //this.setState({item: {price: 0, text: ''}});
+
+      TOTAL_COST = Number(TOTAL_COST) + Number(item.price);
     }
-    TOTAL_COST = Number(TOTAL_COST) + Number(item.price);
   };
 
-  deleteItem = (id) => {
-    console.log(this.state.item.id);
-    const {array, item} = this.state;
-    const newArray = array.filter(item => id !== item.id);
-    this.setState({array: newArray});
-    TOTAL_COST = Number(TOTAL_COST) - Number(item.price);
-  };
-
-  renderTableData() {
-    return this.state.array.map((elem) => {
-      return (
-            <tr key={elem.id}>
-              <td>
-                {elem.text}
-              </td>
-              <td>
-                {elem.price}
-              </td>
-              <td>
-              {elem.pictures.map((picture) => {
-                console.log(picture[elem.id]);
-                return (
-                    <td>
-                      <img style={{width: '200px'}} src={picture[elem.id].download_url} alt="Product"/>
-                      </td>
-                  )})}
-              </td>
-              <td>
-                <button
-                    id='deleteButton'
-                    onClick={() => this.deleteItem(elem.id)}>
-                  Удалить</button>
-              </td>
-            </tr>
-      )
-    })
+  deleteItem = (elem) => {
+    const {array} = this.state;
+    console.log(elem);
+    const newArray = array.filter(item => {
+      return item !== elem
+    });
+    console.log(newArray);
+    this.setState({
+      array: newArray
+    });
+    console.log('PRICE ', elem.price);
+    TOTAL_COST = Number(TOTAL_COST) - Number(elem.price);
   };
 
   render() {
+    const {array} = this.state;
     return (
         <div style={{marginTop:'70px'}}>
             <form>
               <input
                   id="input"
-                  placeholder='Введите цену'
-                  type='text'
-                  onChange={this.changeHandlerPrice}/>
-              <input
-                  id="input"
                   placeholder='Введите название'
-                  style={inputStyle}
                   type="text"
                   onChange={this.changeHandlerProduct}/>
+              <input
+                  id="input"
+                  placeholder='Введите цену'
+                  type='number'
+                  onChange={this.changeHandlerPrice}/>
               <input
                   id="addButton"
                   type="button"
                   value="Добавить"
                   onClick={this.addProductPrice}/>
             </form>
-          <div id='totalCost'>
-            Общая стоимость: {TOTAL_COST}
-          </div>
-
-          <table id='products'>
-            <tr>
-              <td>Название</td>
-              <td>Цена</td>
-              <td>Изображение</td>
-            </tr>
-            <tbody>
-            {this.renderTableData()}
-            </tbody>
-          </table>
+          {
+            array.length === 0 &&
+            <p id='withoutEl'>Добавьте элементы</p>
+          }
+          {
+            array.length > 0 &&
+            <div>
+            <div id='totalCost'>
+              Общая стоимость: {TOTAL_COST}
+            </div>
+              <table id='products'>
+                <tbody>
+                <tr>
+                  <td>Название</td>
+                  <td>Цена</td>
+                  <td>Изображение</td>
+                </tr>
+                {array.map((elem) => {
+                  return (
+                      <tr key={elem}>
+                        <td>{elem.text}</td>
+                        <td>{elem.price}</td>
+                        <td>
+                          {elem.pictures.map((picture) => {
+                            return (
+                                <td>
+                                  <img style={{width: '200px'}} src={picture[elem.id].download_url} alt="Product"/>
+                                </td>
+                            )
+                          })}
+                        </td>
+                        <td>
+                          <button
+                              id='deleteButton'
+                              onClick={() => this.deleteItem(elem)}>
+                            Удалить
+                          </button>
+                        </td>
+                      </tr>
+                  )
+                })}
+                </tbody>
+              </table>
+             </div>
+            }
         </div>
     );
   }

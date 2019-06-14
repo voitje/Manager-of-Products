@@ -6,6 +6,7 @@
     width: 220px;
     font-size: 20px;
     margin-left: 10px;
+    user-select: none;
 }
 
 #products td, #products th {
@@ -26,8 +27,7 @@
 }
 
 #deleteButton {
-    color: #fff; /* цвет текста */
-    text-decoration: none; /* убирать подчёркивание у ссылок */
+    color: #fff;
     user-select: none; /* убирать выделение текста */
     background-color: red;  /* фон кнопки */
     padding: 15px;/* отступ от текста */
@@ -36,8 +36,10 @@
     float: right;
     border-radius:  8px;
     font-size: 20px;
+    cursor: pointer;
 }
 #addButton {
+    user-select: none;
     margin-left: 10px;
     background-color: greenyellow;
     border: 3px;
@@ -48,9 +50,11 @@
     display: inline-block;
     font-size: 20px;
     border-radius: 8px;
+    cursor: pointer;
 }
 
 #input {
+    margin-top: 20px;
     padding: 15px;
     font-size: 20px;
     margin-left: 10px;
@@ -58,6 +62,12 @@
 
 #totalCost {
     font-size: 20px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+#withoutEl {
+    font-size: 30px;
     margin-bottom: 10px;
     margin-left: 10px;
 }
