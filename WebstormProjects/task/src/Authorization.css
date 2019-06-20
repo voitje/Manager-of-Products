@@ -1,9 +1,30 @@
 #name {
     float: bottom;
 }
+
 .FormCenter {
     margin-left: auto;
     margin-right: auto;
     width: 6em;
     margin-top: 100px;
+}
+
+#enter{
+    user-select: none;
+    background-color: greenyellow;
+    border: 3px;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#password, #email{
+    margin-top: 20px;
+    padding: 15px;
+    font-size: 20px;
 }

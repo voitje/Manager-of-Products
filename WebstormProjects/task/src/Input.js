@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { Link } from "react-router-dom";
+import Modal from './components/Modal'
 import './Input.css'
 
-var TOTAL_COST = 0;
+let TOTAL_COST = 0;
 
 class Input extends Component {
   state = {
@@ -13,6 +14,7 @@ class Input extends Component {
       pictures: [],
       price: 0
     },
+    isOpen: false,
   };
 
   /*componentDidMount() {
@@ -53,51 +55,80 @@ class Input extends Component {
       this.setState({array: array, item: {...this.state.item, id: this.state.item.id + 1}});
 
       TOTAL_COST = Number(TOTAL_COST) + Number(item.price);
+      this.setState({style: {display: 'none'}});
+    }
+  };
+
+  openModuleWindow = () => {
+    this.setState({style: { display: 'block'}});
+  };
+
+  closeSpan = () => {
+    this.setState({style: { display: 'none'}});
+    console.log(this.state.style.display);
+  };
+
+  addItem = (text, price, id) => {
+    if (text !== '') {
+      console.log('ADD_ITEM_PROPS', text, price, id);
+      this.setState(prevState => ({
+        ...prevState,
+        array: [...prevState.array, {text, price, id}]
+      }), () => console.log('NAGOVNIl', this.state));
+      console.log('SETSTATE_ITEM', this.state);
+      TOTAL_COST = Number(TOTAL_COST) + Number(price);
+      //this.handleChangeModal();
+      console.log('IS_OPEN', this.state.isOpen);
     }
   };
 
   deleteItem = (elem) => {
     const {array} = this.state;
-    console.log(elem);
     const newArray = array.filter(item => {
-      return item !== elem
-    });
-    console.log(newArray);
-    this.setState({
-      array: newArray
-    });
-    console.log('PRICE ', elem.price);
-    TOTAL_COST = Number(TOTAL_COST) - Number(elem.price);
+       return item !== elem
+     });
+     this.setState({
+       array: newArray
+     });
+     TOTAL_COST = Number(TOTAL_COST) - Number(elem.price);
+  };
+
+  handleChangeModal = () => {
+    this.setState(prevState => ({
+      ...prevState,
+      isOpen: !prevState.isOpen,
+    }));
+    console.log(this.state);
   };
 
   render() {
+    console.log('IS_OPEN',this.state.isOpen);
     const {array} = this.state;
     return (
         <div style={{marginTop:'70px'}}>
           <div style={{marginLeft: '90%'}}>
             <Link to='/'>ВЫЙТИ</Link>
           </div>
+          <Modal
+              isOpen={this.state.isOpen}
+              addItem={this.addItem}
+              handleChangeModal={this.handleChangeModal}
+              item={this.state.item}
+              array={this.state.array}
+              TOTAL_COST={TOTAL_COST}/>
             <form>
-              <input
-                  id="input"
-                  placeholder='Введите название'
-                  type="text"
-                  onChange={this.changeHandlerProduct}/>
-              <input
-                  id="input"
-                  placeholder='Введите цену'
-                  type='number'
-                  onChange={this.changeHandlerPrice}/>
               <input
                   id="addButton"
                   type="button"
                   value="Добавить"
-                  onClick={this.addProductPrice}/>
+                  onClick={this.handleChangeModal}/>
             </form>
+          {console.log('FORM_ARRAY_LENGTH', array.length)}
           {
             array.length === 0 &&
             <p id='withoutEl'>Добавьте элементы</p>
           }
+
           {
             array.length > 0 &&
             <div>
@@ -117,7 +148,7 @@ class Input extends Component {
                         <td>{elem.text}</td>
                         <td>{elem.price}</td>
                         <td>
-                          {elem.pictures.map((picture) => {
+                          {typeof this.state.item.pictures !== 'undefined' && this.state.item.pictures.map((picture) => {
                             return (
                                 <td>
                                   <img style={{width: '200px'}} src={picture[elem.id].download_url} alt="Product"/>
@@ -144,6 +175,3 @@ class Input extends Component {
   }
 }
 export default Input;
-/*<td>
-     <img src={elem.pictures} alt="Product"/>
-   </td>*/

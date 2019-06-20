@@ -36,14 +36,13 @@ class Authorization extends Component {
       <div className="FormCenter">
         <form className="FormFields" onSubmit={this.handleSubmit}>
           <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
+            <label htmlFor="email">
               E-Mail
             </label>
             <p>
               <input
                 type="email"
                 id="email"
-                className="FormField__Input"
                 placeholder="Введите вашу почту"
                 name="email"
                 value={this.state.email}
@@ -53,14 +52,13 @@ class Authorization extends Component {
           </div>
 
           <div className="FormField">
-            <label className="FormField__Label" htmlFor="password">
+            <label htmlFor="password">
               Пароль:
             </label>
             <p>
               <input
                 type="password"
                 id="password"
-                className="FormField__Input"
                 placeholder="Введите ваш пароль"
                 name="password"
                 value={this.state.password}
@@ -70,7 +68,7 @@ class Authorization extends Component {
           </div>
 
           <div className="FormField">
-            <button type="submit" className="FormField__Button mr-20">
+            <button id='enter' type="submit">
               <Link to="/accounting/">Войти</Link>
             </button>
           </div>
