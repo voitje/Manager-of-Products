@@ -1,0 +1,74 @@
+.ticket {
+    width: 600px;
+    height: 130px;
+    margin-bottom: 20px;
+    background: #ffff;
+    border-radius: 7px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    padding: 25px;
+    display: flex;
+}
+
+.ticket-list {
+    margin-left: 20px;
+}
+
+.logo-with-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-buy {
+    margin-top: 20px;
+    width: 180px;
+    height: 60px;
+    background: #ff6d00;
+    color: white;
+    border-radius: 7px;
+    border: 0 solid rgba(0,0,0,0.2);
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    outline: none;
+}
+
+.info-ticket {
+    display: flex;
+    margin-left: 20px;
+}
+
+
+
+.to {
+    text-align: right;
+    margin-left: 30px;
+}
+
+.time {
+    font-size: 40px;
+}
+
+.transfer {
+    padding-top: 10px;
+    width: 110px;
+}
+
+.departure-date, .arrival-date {
+    color: #a4abae;
+}
+
+.line {
+    border: none;
+    background-color: #bfbfbf;
+    height: 2px;
+    width: 90px;
+}
+
+.line-with-plane {
+    display: flex;
+}
+
+.plane {
+    transform: rotate(90deg);
+    width: 15px;
+    height: 15px;
+}
